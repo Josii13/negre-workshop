@@ -89,7 +89,7 @@
         letter-spacing: 0.02em;
     }
 
-    .nav-links a::before {
+    /* .nav-links a::before {
         content: '';
         position: absolute;
         bottom: 8px;
@@ -99,7 +99,7 @@
         height: 2px;
         background: #000;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    } */
 
     .nav-links a:hover {
         color: #000;
