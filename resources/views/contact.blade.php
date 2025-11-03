@@ -17,9 +17,9 @@
             <div class="contact-form">
                 <h2>{{ $pageContent->form_title ?? 'Envoyez-moi un message' }}</h2>
                 @if($pageContent && $pageContent->form_description)
-                <p style="margin-bottom: 1.5rem; color: #666;">{{ $pageContent->form_description }}</p>
+                <p style="margin-bottom: 1.5rem; color: black;">{{ $pageContent->form_description }}</p>
                 @endif
-                
+
                 <form action="{{ route('contact.store') }}" method="POST" id="contactForm">
                     @csrf
                     <div class="form-group">
@@ -71,11 +71,11 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Fonction pour préparer les données email
             const prepareEmailData = (formData, serverData) => ({
                 to_email: '{{ env('CONTACT_EMAIL', 'fredericnda.ci@gmail.com') }}',

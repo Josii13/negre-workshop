@@ -246,33 +246,45 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.85);
         z-index: 1000;
         overflow-y: auto;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(10px);
+        animation: modalBackdropFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalBackdropFadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
     .modal-content {
         position: relative;
-        background-color: #1a1a1a;
-        margin: 5% auto;
+        background: linear-gradient(145deg, #1f1f1f 0%, #0a0a0a 100%);
+        margin: 3% auto;
         padding: 0;
-        width: 80%;
-        max-width: 800px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        width: 85%;
+        max-width: 850px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+                    0 0 0 1px rgba(255, 255, 255, 0.05);
         color: #FFFFFF;
-        animation: modalFadeIn 0.3s ease-out;
+        animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
     }
 
     @keyframes modalFadeIn {
         from {
             opacity: 0;
-            transform: translateY(-50px);
+            transform: translateY(-30px) scale(0.95);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
     }
 
@@ -280,64 +292,144 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 2rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem 2.5rem;
+        background: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+    }
+
+    .modal-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
     }
 
     .modal-header h2 {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 500;
+        letter-spacing: -0.02em;
+        background: black;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .close-modal {
-        background: none;
-        border: none;
-        color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: black;
         font-size: 1.5rem;
         cursor: pointer;
-        transition: color 0.3s ease;
-        width: 40px;
-        height: 40px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 42px;
+        height: 42px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
+        border-radius: 10px;
+        font-weight: 300;
     }
 
     .close-modal:hover {
-        color: #FFFFFF;
-        background-color: rgba(255, 255, 255, 0.1);
+        color: black;
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: rotate(90deg);
     }
 
     .modal-body {
-        padding: 2rem;
-        max-height: 60vh;
+        padding: 2.5rem;
+        max-height: 65vh;
         overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    .modal-body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
     }
 
     .modal-body h3 {
-        font-size: 1.25rem;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.35rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #FFFFFF;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        position: relative;
+        padding-left: 1rem;
+    }
+
+    .modal-body h3::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 60%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 100%);
+        border-radius: 2px;
+    }
+
+    .modal-body h3:first-child {
+        margin-top: 0;
     }
 
     .modal-body p {
-        line-height: 1.6;
-        margin-bottom: 1rem;
-        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.98rem;
+    }
+
+    .modal-body p strong {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
     }
 
     .modal-body ul {
         margin-left: 1.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
+        list-style: none;
+        padding-left: 0;
     }
 
     .modal-body li {
-        margin-bottom: 0.5rem;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.5;
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.6;
+        position: relative;
+        padding-left: 1.75rem;
+    }
+
+    .modal-body li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 300;
     }
 
     /* Responsive */
@@ -503,9 +595,9 @@
                 <ul class="footer-links">
                     <li><a href="{{ route('home') }}#about">L'Artiste</a></li>
                     <li><a href="{{ route('gallery') }}">NÈGRE Workshop</a></li>
-                    <li><a href="#">Expositions</a></li>
+                    {{-- <li><a href="#">Expositions</a></li>
                     <li><a href="#">Publications</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Blog</a></li> --}}
                 </ul>
             </div>
 
@@ -550,7 +642,7 @@
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>© 2025 Frederic N'DA. Tous droits réservés. Fait avec <span class="footer-heart">♥</span> en Côte
+            <p>© 2025 Frederic N'DA. Tous droits réservés. Développé par <span class="footer-heart">NetDev Consulting</span> en Côte
                 d'Ivoire</p>
             <div class="footer-bottom-links">
                 <a href="#" onclick="openModal('mentions-legales')">Mentions légales</a>

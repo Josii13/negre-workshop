@@ -232,7 +232,7 @@
     .hero-text p {
         font-size: 1.15rem;
         line-height: 1.8;
-        color: #555;
+        color: black;
         margin-bottom: 1.5rem;
         font-weight: 300;
     }
@@ -569,7 +569,7 @@
     </section>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="about">
         <div class="hero-content">
             <div class="hero-image">
                 <img src="{{ asset('images/' . ($pageContent->hero_image ?? 'img2.jpg')) }}" alt="{{ $pageContent->hero_title ?? 'Frederic N\'DA' }}" loading="lazy">

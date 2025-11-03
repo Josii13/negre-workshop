@@ -29,7 +29,7 @@
     .banner-content .subtitle {
         font-size: 1.5rem;
         font-weight: 300;
-        color: #666;
+        color: black;
         margin-bottom: 2rem;
         letter-spacing: 0.05em;
     }
@@ -37,7 +37,7 @@
     .banner-content p {
         font-size: 1.15rem;
         line-height: 1.8;
-        color: #555;
+        color: black;
         font-weight: 300;
     }
 
@@ -46,7 +46,7 @@
         margin: 3rem auto 0;
         text-align: left;
         font-style: italic;
-        color: #666;
+        color: black;
         border-left: 3px solid #000;
         padding-left: 2rem;
         line-height: 1.7;
@@ -124,7 +124,7 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
-        color: #666;
+        color: black;
         font-size: 0.9rem;
     }
 
@@ -208,7 +208,7 @@
 
     .autocomplete-item-meta {
         font-size: 0.85rem;
-        color: #666;
+        color: black;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -219,7 +219,7 @@
         padding: 0.2rem 0.6rem;
         border-radius: 12px;
         font-size: 0.75rem;
-        color: #666;
+        color: black;
     }
 
     .autocomplete-no-results {
@@ -238,7 +238,7 @@
     .search-results-count {
         text-align: center;
         margin: 1.5rem 0 0;
-        color: #666;
+        color: black;
         font-size: 0.95rem;
     }
 
@@ -280,7 +280,7 @@
         font-family: 'Inter', sans-serif;
         font-size: 1rem;
         font-weight: 400;
-        color: #666;
+        color: black;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
@@ -409,7 +409,7 @@
     }
 
     .activity-info p {
-        color: #666;
+        color: black;
         font-size: 0.95rem;
         line-height: 1.6;
         margin-bottom: auto;
@@ -598,7 +598,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #666;
+        color: black;
         margin-bottom: 1.25rem;
     }
 
@@ -615,7 +615,7 @@
     }
 
     .characteristic-label {
-        color: #666;
+        color: black;
         font-size: 0.95rem;
     }
 

@@ -198,7 +198,7 @@
     .search-icon {
         position: absolute;
         right: 1.5rem;
-        color: #666;
+        color: black;
         pointer-events: none;
     }
 
@@ -280,7 +280,7 @@
 
     .autocomplete-item-price {
         font-size: 0.9rem;
-        color: #666;
+        color: black;
     }
 
     .no-results {
@@ -422,7 +422,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #666;
+        color: black;
         margin-bottom: 1rem;
     }
 
@@ -439,7 +439,7 @@
     }
 
     .characteristic-label {
-        color: #666;
+        color: black;
         font-size: 0.95rem;
         font-weight: 500;
     }
@@ -668,7 +668,7 @@
                 </div>
             </div>
             @empty
-            <p style="text-align: center; grid-column: 1/-1; padding: 3rem; color: #666;">Aucun produit disponible pour le moment.</p>
+            <p style="text-align: center; grid-column: 1/-1; padding: 3rem; color: black;">Aucun produit disponible pour le moment.</p>
             @endforelse
         </div>
     </section>
@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             title: 'Redirection vers WhatsApp',
                             html: `
                                 <p><strong>Commande enregistrée avec succès !</strong></p>
-                                <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
+                                <p style="margin-top: 1rem; font-size: 0.9em; color: black;">
                                     <i class="fas fa-info-circle"></i> Le message a été copié automatiquement.<br>
                                     Si le texte n'apparaît pas dans WhatsApp, <strong>collez-le manuellement</strong> (Ctrl+V).
                                 </p>
@@ -1010,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 title: 'Commande envoyée !',
                                 html: `
                                     <p>${data.message || 'Votre commande a été prise en compte avec succès.'}</p>
-                                    <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
+                                    <p style="margin-top: 1rem; font-size: 0.9em; color: black;">
                                         Un email de confirmation vous a été envoyé.
                                     </p>
                                 `,

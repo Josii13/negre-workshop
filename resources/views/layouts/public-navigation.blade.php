@@ -427,7 +427,7 @@
                     FN
                 </div>
             @endif
-            <span>FREDERIC N'DA</span>
+            <span>Nègre Studio 72</span>
         </a>
 
         <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
