@@ -161,7 +161,7 @@
     }
 
     .footer-heart {
-        color: #FF6B6B;
+        color: #FF6B6B !important;
         animation: heartbeat 1.5s ease infinite;
     }
 
@@ -629,21 +629,20 @@
                 </div>
 
                 <!-- Newsletter (optionnel) -->
-                <div class="footer-newsletter" style="margin-top: 1.5rem;">
+                {{-- <div class="footer-newsletter" style="margin-top: 1.5rem;">
                     <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: rgba(255, 255, 255, 0.9);">Restez informé
                     </p>
                     <form class="newsletter-form" onsubmit="event.preventDefault();">
                         <input type="email" class="newsletter-input" placeholder="Votre email" required>
                         <button type="submit" class="newsletter-btn">S'inscrire</button>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>© 2025 Frederic N'DA. Tous droits réservés. Développé par <span class="footer-heart">NetDev Consulting</span> en Côte
-                d'Ivoire</p>
+            <p>© 2025 Frederic N'DA. Tous droits réservés. Développé par <span class="footer-heart"><a href="">DevCaleb</a></span></p>
             <div class="footer-bottom-links">
                 <a href="#" onclick="openModal('mentions-legales')">Mentions légales</a>
                 <a href="#" onclick="openModal('politique-confidentialite')">Politique de confidentialité</a>

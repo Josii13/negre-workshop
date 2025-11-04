@@ -49,14 +49,21 @@
         @php
             $pendingOrders = \App\Models\Order::where('status', 'pending')->latest()->take(5)->get();
             $pendingOrdersCount = \App\Models\Order::where('status', 'pending')->count();
+
+            // Calculer le nombre de notifications non lues
+            $unreadOrdersCount = $pendingOrdersCount;
+            if(isset($_COOKIE['read_orders'])) {
+                $readOrders = json_decode($_COOKIE['read_orders'], true) ?? [];
+                $unreadOrdersCount = $pendingOrdersCount - count($readOrders);
+            }
         @endphp
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                @if($pendingOrdersCount > 0)
-                    <span class="badge badge-danger badge-counter">{{ $pendingOrdersCount > 9 ? '9+' : $pendingOrdersCount }}</span>
+                @if($unreadOrdersCount > 0)
+                    <span class="badge badge-danger badge-counter" id="ordersBadge">{{ $unreadOrdersCount > 9 ? '9+' : $unreadOrdersCount }}</span>
                 @endif
             </a>
             <!-- Dropdown - Alerts -->
@@ -66,7 +73,13 @@
                     Centre d'alertes
                 </h6>
                 @forelse($pendingOrders as $order)
-                    <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.orders.index') }}">
+                    @php
+                        $isRead = isset($_COOKIE['read_orders']) && in_array($order->id, json_decode($_COOKIE['read_orders'], true) ?? []);
+                    @endphp
+                    <a class="dropdown-item d-flex align-items-center order-notification {{ $isRead ? 'read-notification' : '' }}"
+                       href="{{ route('admin.orders.index') }}"
+                       data-order-id="{{ $order->id }}"
+                       style="{{ $isRead ? 'opacity: 0.6;' : '' }}">
                         <div class="mr-3">
                             <div class="icon-circle bg-warning">
                                 <i class="fas fa-shopping-cart text-white"></i>
@@ -94,14 +107,21 @@
         @php
             $recentContacts = \App\Models\Contact::latest()->take(5)->get();
             $contactsCount = \App\Models\Contact::count();
+
+            // Calculer le nombre de messages non lus
+            $unreadContactsCount = $contactsCount;
+            if(isset($_COOKIE['read_contacts'])) {
+                $readContacts = json_decode($_COOKIE['read_contacts'], true) ?? [];
+                $unreadContactsCount = $contactsCount - count($readContacts);
+            }
         @endphp
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                @if($contactsCount > 0)
-                    <span class="badge badge-danger badge-counter">{{ $contactsCount > 9 ? '9+' : $contactsCount }}</span>
+                @if($unreadContactsCount > 0)
+                    <span class="badge badge-danger badge-counter" id="contactsBadge">{{ $unreadContactsCount > 9 ? '9+' : $unreadContactsCount }}</span>
                 @endif
             </a>
             <!-- Dropdown - Messages -->
@@ -111,7 +131,14 @@
                     Centre de messages
                 </h6>
                 @forelse($recentContacts as $contact)
-                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="event.preventDefault(); showContactModal('{{ $contact->id }}', '{{ addslashes($contact->name) }}', '{{ addslashes($contact->email) }}', '{{ addslashes($contact->phone ?? 'N/A') }}', '{{ addslashes($contact->message) }}', '{{ $contact->created_at->format('d/m/Y à H:i') }}');">
+                    @php
+                        $isRead = isset($_COOKIE['read_contacts']) && in_array($contact->id, json_decode($_COOKIE['read_contacts'], true) ?? []);
+                    @endphp
+                    <a class="dropdown-item d-flex align-items-center contact-notification {{ $isRead ? 'read-notification' : '' }}"
+                       href="#"
+                       onclick="event.preventDefault(); showContactModal('{{ $contact->id }}', '{{ addslashes($contact->name) }}', '{{ addslashes($contact->email) }}', '{{ addslashes($contact->phone ?? 'N/A') }}', '{{ addslashes($contact->message) }}', '{{ $contact->created_at->format('d/m/Y à H:i') }}');"
+                       data-contact-id="{{ $contact->id }}"
+                       style="{{ $isRead ? 'opacity: 0.6;' : '' }}">
                         <div class="dropdown-list-image mr-3">
                             <div class="icon-circle bg-primary">
                                 <i class="fas fa-user text-white"></i>
@@ -159,3 +186,94 @@
 
 </nav>
 
+<script>
+// Fonction pour mettre à jour un cookie
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + '=' + JSON.stringify(value) + ';expires=' + expires.toUTCString() + ';path=/';
+}
+
+// Fonction pour récupérer un cookie
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return JSON.parse(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des notifications de commandes
+    const orderNotifications = document.querySelectorAll('.order-notification');
+    const ordersBadge = document.getElementById('ordersBadge');
+
+    orderNotifications.forEach(notification => {
+        notification.addEventListener('click', function(e) {
+            const orderId = this.getAttribute('data-order-id');
+
+            // Récupérer les commandes lues
+            let readOrders = getCookie('read_orders') || [];
+            if (!readOrders.includes(orderId)) {
+                readOrders.push(orderId);
+                setCookie('read_orders', readOrders, 1); // Expire dans 1 jour
+            }
+
+            // Mettre à jour l'interface
+            if (ordersBadge) {
+                let currentCount = parseInt(ordersBadge.textContent);
+                if (currentCount > 1) {
+                    ordersBadge.textContent = currentCount - 1;
+                } else {
+                    ordersBadge.remove();
+                }
+            }
+
+            // Marquer comme lu
+            this.style.opacity = '0.6';
+            this.classList.add('read-notification');
+        });
+    });
+
+    // Gestion des notifications de contacts
+    const contactNotifications = document.querySelectorAll('.contact-notification');
+    const contactsBadge = document.getElementById('contactsBadge');
+
+    contactNotifications.forEach(notification => {
+        notification.addEventListener('click', function(e) {
+            const contactId = this.getAttribute('data-contact-id');
+
+            // Récupérer les contacts lus
+            let readContacts = getCookie('read_contacts') || [];
+            if (!readContacts.includes(contactId)) {
+                readContacts.push(contactId);
+                setCookie('read_contacts', readContacts, 1); // Expire dans 1 jour
+            }
+
+            // Mettre à jour l'interface
+            if (contactsBadge) {
+                let currentCount = parseInt(contactsBadge.textContent);
+                if (currentCount > 1) {
+                    contactsBadge.textContent = currentCount - 1;
+                } else {
+                    contactsBadge.remove();
+                }
+            }
+
+            // Marquer comme lu
+            this.style.opacity = '0.6';
+            this.classList.add('read-notification');
+        });
+    });
+
+    // Fonction pour réinitialiser toutes les notifications
+    window.resetAllNotifications = function() {
+        setCookie('read_orders', [], 1);
+        setCookie('read_contacts', [], 1);
+        location.reload();
+    };
+});
+</script>
