@@ -8,7 +8,7 @@
     .carousel-section {
         width: 100%;
         max-width: 1400px;
-        margin: 100px auto 60px;
+        margin: 120px auto 60px;
         padding: 0 2rem;
     }
 
@@ -369,7 +369,7 @@
     /* Responsive Design */
     @media (max-width: 1024px) {
         .carousel-section {
-            margin: 90px auto 50px;
+            margin: 180px auto 50px;
         }
 
         .carousel-container {
@@ -393,7 +393,7 @@
 
     @media (max-width: 768px) {
         .carousel-section {
-            margin: 80px auto 40px;
+            margin: 130px auto 40px;
             padding: 0 1rem;
         }
 

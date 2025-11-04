@@ -534,7 +534,7 @@
         <div class="footer-main">
             <!-- Brand Section -->
             <div class="footer-brand">
-                <h3>Frederic N'DA</h3>
+                <h3>Nègre Studio 72</h3>
                 <p>Artiste peintre et designer passionné, explorant l'intersection entre l'art contemporain, le design
                     et la culture africaine à travers des créations uniques et engagées.</p>
 
@@ -629,14 +629,14 @@
                 </div>
 
                 <!-- Newsletter (optionnel) -->
-                {{-- <div class="footer-newsletter" style="margin-top: 1.5rem;">
+                <div class="footer-newsletter" style="margin-top: 1.5rem;">
                     <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: rgba(255, 255, 255, 0.9);">Restez informé
                     </p>
                     <form class="newsletter-form" onsubmit="event.preventDefault();">
                         <input type="email" class="newsletter-input" placeholder="Votre email" required>
                         <button type="submit" class="newsletter-btn">S'inscrire</button>
                     </form>
-                </div> --}}
+                </div>
             </div>
         </div>
 
