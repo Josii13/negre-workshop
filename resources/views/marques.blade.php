@@ -189,7 +189,7 @@
     .brand-description p {
         font-size: 1rem;
         line-height: 1.8;
-        color: #555;
+        color: black;
         font-weight: 300;
         margin: 0;
     }
@@ -673,7 +673,7 @@
     .detail-modal-content::-webkit-scrollbar-thumb:hover,
     .order-modal-content::-webkit-scrollbar-thumb:hover,
     .autocomplete-results::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: black;
     }
 </style>
 @endsection

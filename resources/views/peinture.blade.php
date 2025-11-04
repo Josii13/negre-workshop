@@ -613,7 +613,7 @@
     .detail-modal-content::-webkit-scrollbar-thumb:hover,
     .order-modal-content::-webkit-scrollbar-thumb:hover,
     .autocomplete-results::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: black;
     }
 </style>
 @endsection
